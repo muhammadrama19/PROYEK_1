@@ -63,14 +63,16 @@ def read_phonebook():
 
 def update_contact(name, phone_number):
     phonebook = load_phonebook()
-    if name in phonebook:
-        phonebook[name] = phone_number
+    name_lower = name.lower()
+    if name_lower in [n.lower() for n in phonebook.keys()]:
+        for contact in phonebook:
+            if contact.lower() == name_lower:
+                phonebook[contact] = phone_number
+                break
         save_phonebook(phonebook)
         print(f"Kontak {name} sudah diupdate menjadi {phone_number}")
     else:
         print(f"Kontak {name} tidak ada")
-
-
 def delete_contact(name):
     phonebook = load_phonebook()
     name_lower = name.lower()
