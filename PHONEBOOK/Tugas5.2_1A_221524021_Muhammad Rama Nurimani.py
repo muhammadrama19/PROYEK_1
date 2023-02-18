@@ -24,7 +24,6 @@ def printheader():
 
 
 def load_phonebook():
-    print(os.getcwd())
     phonebook = {}
     try:
         with open("phonebook.txt", "r") as f:
