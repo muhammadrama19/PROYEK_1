@@ -125,10 +125,11 @@ def main():
             search_contact(name)
         elif choice == "6":
             run_program = False
+            print("Program selesai. Apakah Anda ingin menjalankannya lagi? (Y/N)")
+            user_choice = input(": ")
+            if user_choice.lower() == "y":
+                main()
         else:
             print("Invalid choice ulangi!")
-    print("Program selesai. Apakah Anda ingin menjalankannya lagi? (Y/N)")
-    user_choice = input(": ")
-    if user_choice.lower() == "y":
-        main()
+
 main()
