@@ -73,6 +73,7 @@ def update_contact(name, phone_number):
         print(f"Kontak {name} sudah diupdate menjadi {phone_number}")
     else:
         print(f"Kontak {name} tidak ada")
+        
 def delete_contact(name):
     phonebook = load_phonebook()
     name_lower = name.lower()
