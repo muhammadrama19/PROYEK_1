@@ -52,11 +52,24 @@ def create_contact(name, phone_number):
     print(f"Kontak {name} telah dibuat dengan nomor:{phone_number}")
 
 
+def printform():
+    print("=================================================================================")
+    print("                                 PHONEBOOK                                        ")
+    print("=================================================================================")
+    print("NO.|             NAMA             |          PHONE NUMBER          |")
+    print("---------------------------------------------------------------------------------")
+
+
 def read_phonebook():
-    printheader()
+    printform()
     if os.path.isfile("phonebook.txt"):
         with open("phonebook.txt", "r") as f:
-            print(f.read())
+            i = 1
+            for line in f:
+                if "," in line:
+                    name, phone_number = line.strip().split(",")
+                    print(f"{i:>2}.| {name:<28} | {phone_number:<30} |")
+                    i += 1
     else:
         print("Phonebook file tidak ada")
 
@@ -73,7 +86,7 @@ def update_contact(name, phone_number):
         print(f"Kontak {name} sudah diupdate menjadi {phone_number}")
     else:
         print(f"Kontak {name} tidak ada")
-        
+
 def delete_contact(name):
     phonebook = load_phonebook()
     name_lower = name.lower()
@@ -99,7 +112,6 @@ def search_contact(name):
             print(f"{name}: {number}")
     else:
         print(f"Tidak ada kontak dengan nama {name}")
-
 
 def main():
     run_program = True
