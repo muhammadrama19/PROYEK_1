@@ -1,0 +1,69 @@
+<html>
+	<head>
+		<title>Hasil Web Scrapping</title>
+        <!--Import library jquery-->
+        <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+        <style>
+            .table{
+                border-collapse: collapse;
+            }
+            .table img{
+                width: 70px;
+            }
+            .table .ranking {
+                text-align: center;
+            }
+            .table .head{
+                text-align: center;
+            }
+            #HasilScrap_json{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            #Hasil_json{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .tables {
+                padding: 5px;
+            }
+
+
+        </style>
+	</head>
+	<body>
+        <h1 style="text-align: center;">Hasil scrapping BeautifulSoup</h1>
+        <div id="Hasil_json"></div>
+        <h1 style="text-align: center;">Hasil scrapping Selenium</h1>
+        <div id="HasilScrap_json"></div>
+	</body>
+    <script type="text/javascript">
+        $(function(){
+            
+            //mengambil data dari file json (BeautifulSoup)
+            $.getJSON('BeritaKompas.json',function(soup){
+                var str = "<table border=1 class='table'>";
+                str +="<tr class='head'><td>No</td><td class='tables'>Judul Berita</td><td class='tables'>Kategori Berita</td><td class='tables'>Waktu Publish</td><td class='tables'>Waktu Scrapping</td></tr>";
+                $.each(soup,function(n,result){
+                    str +=`<tr><td class='ranking'>${result.id}</td><td class='tables'>${result.judul}</td><td class='tables'>${result.kategori}</td><td class='tables'>${result.waktu}</td><td class='tables'>${result.waktu_local}</td></tr>`;
+                });
+                str +="</table>";
+                $('#Hasil_json').html(str);
+            });
+
+            //mengambil data dari file json (Selenium)
+            $.getJSON('HasilScrap.json',function(soup){
+                var str = "<table border=1 class='table'>";
+                str +="<tr class='head'><td>No</td><td class='tables'>Album</td><td class='tables'>Top 100 Songs</td><td class='tables'>Waktu Scrapping</td></tr>";
+                $.each(soup,function(n,result){
+                    str +=`<tr><td class='ranking'>${result.Rangking}</td><td class='tables'><img src="${result.Album}"></td><td class='tables'><h3>${result.Penyanyi}</h3><p>${result.Judul}</p></td><td class='tables'>${result.Waktu_scrapping}</td></tr>`;
+                });
+                str +="</table>";
+                $('#HasilScrap_json').html(str);
+            });
+
+        });
+    </script>
+</html>
